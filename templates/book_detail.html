@@ -1,0 +1,63 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <title>{{ title }} - Book Detail</title>
+    <script src="https://cdn.tailwindcss.com"></script>
+</head>
+
+<body class="bg-white">
+
+    <nav class="bg-gray-800 p-4">
+        <div class="container mx-auto flex justify-between items-center">
+            <a class="text-white text-xl font-bold" href="/">My Book Recommender</a>
+            <ul class="flex space-x-4">
+                <li><a href="/" class="text-white hover:text-gray-400">Home</a></li>
+                <li><a href="/recommend" class="text-white hover:text-gray-400">Recommend</a></li>
+                <li><a href="/contact" class="text-white hover:text-gray-400">Contact</a></li>
+            </ul>
+        </div>
+    </nav>
+
+    
+    <div class="container mx-auto my-10">
+      <h1 class="text-left ml-8 text-4xl font-bold my-8" style="margin-left: 30px;">Book Details</h1>
+        <!-- Thông tin sách hiện tại -->
+        <div class="flex flex-col md:flex-row items-start md:items-center">
+          <img src="{{ image }}" alt="{{ title }}" class="h-80 w-auto object-cover rounded-lg ml-8 mr-8" />
+          <div class="flex flex-col justify-center space-y-2">
+              <h1 class="text-3xl font-bold text-blue-600">{{ title }}</h1>
+              <p class="text-lg font-medium">Author: {{ author }}</p>
+              <p class="text-lg font-medium">Votes: {{ votes }}</p>
+              <p class="text-lg font-medium">Rating: {{ rating }}</p>
+          </div>
+      </div>
+      
+
+        <!-- Gợi ý các sách có cùng tên -->
+        <div class="mt-10">
+            <h2 class="text-2xl font-semibold rounded-xl p-4">Books with the Same Title</h2>
+            <div class="grid grid-cols-2 md:grid-cols-4 gap-4 mt-5 mx-4">
+                {% for book in similar_books %}
+                <div class="bg-white shadow-md rounded-xl p-4">
+                    <img src="{{ book['Image-URL-M'] }}" alt="{{ book['Book-Title'] }}" class="h-60 w-full object-cover rounded-lg mb-4" />
+                    <p class="text-sm text-gray-600">{{ book['Book-Author'] }}</p>
+                    <p class="text-lg font-bold">{{ book['Book-Title'] }}</p>
+                </div>
+                {% endfor %}
+            </div>
+        </div>
+        <div class="text-center mt-8">
+            <div class="text-left mt-8">
+                <a href="/" class="bg-blue-500 hover:bg-blue-600 text-white font-bold py-2 px-4 rounded ml-4">
+                    Back to Home
+                </a>
+            </div>
+            
+            
+        </div>
+    </div>
+
+</body>
+</html>

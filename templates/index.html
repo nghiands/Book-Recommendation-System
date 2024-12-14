@@ -1,0 +1,52 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <title>Book Recommender System - Recommend</title>
+    <script src="https://cdn.tailwindcss.com"></script>
+</head>
+
+<body style="background-color:white">
+
+    <nav class="bg-gray-800 p-4">
+        <div class="container mx-auto flex justify-between items-center">
+            <a class="text-white text-xl font-bold" href="/">My Book Recommender</a>
+            <ul class="flex space-x-4">
+                <li><a href="/" class="text-white hover:text-gray-400">Home</a></li>
+                <li><a href="/recommend" class="text-white hover:text-gray-400">Recommend</a></li>
+                <li><a href="/contact" class="text-white hover:text-gray-400">Contact</a></li>
+            </ul>
+        </div>
+    </nav>
+
+    <h1 class="text-left ml-8 text-4xl font-bold my-8" style="margin-left: 30px;">Top 50 Books</h1>
+
+    <div class="container mx-auto px-4">
+        <section id="Projects" class="grid grid-cols-2 lg:grid-cols-4 md:grid-cols-2 justify-items-center gap-y-10 gap-x-4 mt-10 mb-5">
+            {% for i in range(book_name|length) %}
+            <div class="w-72 bg-white shadow-md rounded-xl duration-500 hover:scale-105 hover:shadow-xl mx-2">
+                <a href="{{ url_for('book_detail', book_id=i) }}">
+                    <img src="{{ image[i] }}" alt="{{ book_name[i] }}" class="h-64 w-72 object-cover object-center rounded-t-xl" />
+                </a>
+                <div class="px-4 py-3">
+                    <span class="text-gray-400 mr-3 uppercase text-xs truncate block">{{ author[i] }}</span>
+                    <p class="text-lg font-bold text-black block capitalize overflow-hidden" style="display: -webkit-box; -webkit-line-clamp: 3; -webkit-box-orient: vertical; height: 4.5em;">
+                        {{ book_name[i] }}
+                    </p>
+                    
+                    <!-- <div class="flex items-center mt-2">
+                        <p class="ms-1 text-sm font-medium text-gray-500 dark:text-gray-400">Votes - {{ votes[i] }}</p>
+                        <div class="ml-auto">
+                            <p class="ms-1 text-sm font-medium text-gray-500 dark:text-gray-400">Rating - {{ rating[i] }}</p>
+                        </div>
+                    </div> -->
+                </div>
+            </div>
+            {% endfor %}
+        </section>
+    </div>
+
+</body>
+
+</html>

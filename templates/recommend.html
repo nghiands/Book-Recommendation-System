@@ -1,0 +1,69 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>Book Recommender System - Recommend</title>
+    <script src="https://cdn.tailwindcss.com"></script>
+    <style>
+        .text-white {
+            color: white;
+        }
+    </style>
+</head>
+<body style="background-color:white">
+
+    <nav class="bg-gray-800 p-4">
+        <div class="container mx-auto flex justify-between items-center">
+            <a class="text-white text-xl font-bold">My Book Recommender</a>
+            <ul class="flex space-x-4">
+                <li><a href="/" class="text-white hover:text-gray-400">Home</a></li>
+                <li><a href="/recommend" class="text-white hover:text-gray-400">Recommend</a></li>
+                <li><a href="/contact" class="text-white hover:text-gray-400">Contact</a></li>
+            </ul>
+        </div>
+    </nav>
+
+    <div class="container">
+      <h1 class="text-2xl font-bold mb-3" style="margin-left: 30px;">Recommend Books</h1>
+  
+      <form action="/recommend_books" method="post" class="mb-8 flex" style="width: calc(100% - 60px); margin-left: 30px; margin-right: 30px;">
+          <input name="user_input" type="text"
+              class="p-3 rounded-l-lg border border-gray-300 focus:outline-none focus:ring-2 focus:ring-blue-500 focus:border-transparent"
+              style="width: 100%;" placeholder="Enter book name or genre..."
+              value="{{ user_input }}">
+          <input type="submit"
+              class="bg-yellow-500 hover:bg-yellow-600 text-white font-bold py-2 px-4 rounded-r-lg cursor-pointer">
+      </form>
+  
+      {% if error_message %}
+          <p class="text-red-500 font-bold text-center">{{ error_message }}</p>
+      {% endif %}
+  
+      <div class="flex flex-wrap justify-center gap-8">
+          {% if data %}
+              {% for item in data %}
+                  <div class="w-72 bg-white shadow-md rounded-xl duration-500 hover:scale-105 hover:shadow-xl">
+                      <a href="#">
+                          <img src="{{ item[2] }}" alt="Product" class="h-60 w-72 object-cover object-center rounded-t-xl" />
+                          <div class="px-4 py-3 w-72">
+                              <span class="text-gray-400 mr-3 uppercase text-xs truncate block">{{ item[1] }}</span>
+                              <p class="text-lg font-bold text-black block capitalize overflow-hidden"
+                                  style="display: -webkit-box; -webkit-line-clamp: 3; -webkit-box-orient: vertical; height: 4.5em;">
+                                  {{ item[0] }}
+                              </p>
+                          </div>
+                      </a>
+                  </div>
+              {% endfor %}
+          {% else %}
+              <!-- <div class="text-center mt-5">
+                  <p class="text-red-500 font-bold">Chưa có sách nào để hiển thị.</p>
+              </div> -->
+          {% endif %}
+      </div>
+  </div>
+  
+  
+
+</body>
+</html>
